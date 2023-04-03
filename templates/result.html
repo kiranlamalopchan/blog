@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+<!--static files-->
+{% load static %}
+<!--title-->
+{% block title %} Result | {{user.username}} {% endblock title%}
+<!--block content-->
+{% block content %}
+<h1 class="text-center">Result Management System</h1>
+<div class="jumbotron">
+  <h1 class="display-4">Result Distrubution Page</h1>
+  <p class="lead">
+    We are in Result Distribution page where we can see the result of particular
+    student.
+  </p>
+  <hr class="my-4" />
+  <p>Respective class with their Grading.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+  </p>
+</div>
+{% endblock %}

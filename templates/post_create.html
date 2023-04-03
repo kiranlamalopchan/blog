@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
+<div class="col-lg-6 mx-auto my-4">
+  <h3>{{title}} Your Article</h3>
+  {% for message in messages %}
+  <div class="alert alert-success" role="alert">{{message}}</div>
+  {% endfor %} {{ form.media }}
+  <form method="POST" action="." enctype="multipart/form-data">
+    {% csrf_token %} {{ form|crispy }}
+    <button
+      class="btn btn-success"
+      type="submit"
+    >
+      Upload</button
+  </form>
+</div>
+{% endblock content %}

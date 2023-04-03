@@ -1,0 +1,73 @@
+<aside class="col-lg-4">
+  <!-- Widget [Search Bar Widget]-->
+  <div class="jumbotron p-2">
+    <div class="widget search">
+      <header>
+        <h3 class="h6">Search the blog</h3>
+      </header>
+      {% if search_results %}
+      <div class="alert alert-success" role="alert">
+        Your Search Blog Found!
+      </div>
+      {% endif %}
+      <form action="" class="search-form" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <input
+            type="text"
+            name="search"
+            placeholder="What are you looking for?"
+          />
+          <button type="submit" class="submit">
+            <i class="icon-search"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Widget [Latest Posts Widget]        -->
+  <div class="widget latest-posts">
+    <header>
+      <h3 class="h6">Latest Posts</h3>
+    </header>
+    <div class="blog-posts">
+      {% for latest_post in latest_posts %}
+      <a href="{{ latest_post.get_absolute_url }}">
+        <div class="item d-flex align-items-center">
+          <div class="image">
+            <img
+              src="{{ latest_post.thumbnail.url }}"
+              alt="..."
+              class="img-fluid"
+            />
+          </div>
+          <div class="title">
+            <strong>{{ latest_post.title }}</strong>
+            <div class="d-flex align-items-center">
+              <div class="comments">
+                <i class="icon-comment"></i>{{ latest_post.comments.count }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Widget [Categories Widget]-->
+  <div class="widget categories">
+    <header>
+      <h3 class="h6">Categories</h3>
+    </header>
+    <!--postloop-->
+    {% for category in category_count %}
+    <!--category-->
+    <div class="item d-flex justify-content-between">
+      <a href="#">{{category.categories__title}}</a>
+      <span>{{category.categories__title__count}}</span>
+    </div>
+    {% endfor %}
+  </div>
+</aside>

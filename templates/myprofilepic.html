@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
+
+<div class="container">
+  <div class="jumbotron my-5">
+    <h1>Profile Picture</h1>
+    <hr class="my-1" />
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %} {{form|crispy}}
+      <button class="btn btn-sm btn-success" type="submit">
+        Change New Profile Picture
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock content %}

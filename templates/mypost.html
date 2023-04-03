@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+<!--loading static-->
+{% load static %}
+<!--block title-->
+{% block title %}My Post | {{user.username}}{% endblock title %}
+<!--block content-->
+{% block content %}
+<div class="container">
+  <div class="row">
+    <main class="posts-listing col-lg-8">
+      <div class="container">
+        {% if articles %}
+        <div class="m-1">
+          <h1>My POST</h1>
+          <span class="badge badge-info">Author: {{user.username}}</span>
+        </div>
+        <div class="row">
+          {% for article in articles %}
+          <div class="post col-lg-6">
+            <div class="post-thumbnail">
+              <a href="{{ article.get_absolute_url }}"
+                ><img
+                  src="{{ article.thumbnail.url }}"
+                  alt="..."
+                  class="img-fluid"
+              /></a>
+            </div>
+            <div class="post-details">
+              <div class="post-meta d-flex justify-content-between">
+                <div class="date meta-last">{{ article.timestamp }}</div>
+              </div>
+              <a
+                class="btn btn-info btn-sm"
+                href="{% url 'post-update' id=article.id %}"
+                role="button"
+                >UPDATE</a
+              >
+              <a
+                class="btn btn-danger btn-sm"
+                href="{% url 'post-delete' id=article.id %}"
+                role="button"
+                >DELETE</a
+              >
+
+              <div class="post-meta d-flex justify-content-between">
+                {% for category in article.categories.all %}
+                <div class="category"><a href="#">{{ category }}</a></div>
+                {% endfor %}
+              </div>
+              <a href="{{ article.get_absolute_url }}">
+                <h3 class="h4">{{article.title}}</h3>
+              </a>
+              <p class="text-muted">{{article.overview | safe }}</p>
+              <footer class="post-footer d-flex align-items-center">
+                <a href="#" class="author d-flex align-items-center flex-wrap">
+                  <div class="avatar">
+                    <img
+                      src="{{ article.author.profile_picture.url }}"
+                      alt="..."
+                      class="img-fluid"
+                    />
+                  </div>
+                  <div class="title">
+                    <span>{{ article.author.name }}</span>
+                  </div>
+                </a>
+                <div class="date">
+                  <i class="icon-clock"></i>{{ article.timestamp|timesince }}
+                  ago
+                </div>
+                <div class="comments meta-last">
+                  <i class="icon-comment"></i>{{article.comment_count}}
+                </div>
+              </footer>
+            </div>
+          </div>
+          {% endfor %} {% else %}
+          <div class="alert alert-danger text-center" role="alert">
+            <div class="jumbotron">
+              <h1>SORRY!</h1>
+              <p>No any Post Found. Create Post</p>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+          <ul
+            class="pagination pagination-template d-flex justify-content-center"
+          >
+            <li class="page-item">
+              <a href="#" class="page-link">
+                <i class="fa fa-angle-left"></i
+              ></a>
+            </li>
+            <li class="page-item">
+              <a href="#" class="page-link active">1</a>
+            </li>
+            <li class="page-item"><a href="#" class="page-link">2</a></li>
+            <li class="page-item"><a href="#" class="page-link">3</a></li>
+            <li class="page-item">
+              <a href="#" class="page-link">
+                <i class="fa fa-angle-right"></i
+              ></a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </main>
+    <aside class="col-lg-4">
+      <!-- Widget [Widget] -->
+      <div class="widget">
+        <header>
+          <h3 class="h6">POST</h3>
+        </header>
+        <div class="blog-posts">
+          <a class="btn btn-sm btn-success" href="/create/" role="button"
+            >Upload Post</a
+          >
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock content %}

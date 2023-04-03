@@ -1,0 +1,17 @@
+{% load static %}
+<!-- Gallery Section-->
+<section class="gallery no-padding">
+  <div class="row">
+    {% for gallery in galleries %}
+    <div class="mix col-lg-3 col-md-3 col-sm-6">
+      <div class="item">
+        <a href="{{ gallery.thumbnail.url }}" data-fancybox="gallery" class="image"><img
+            src="{{ gallery.thumbnail.url }}" alt="..." class="img-fluid" />
+          <div class="overlay d-flex align-items-center justify-content-center">
+            <i class="icon-search"></i></div>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>

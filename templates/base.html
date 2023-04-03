@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<title>{% block title %}{% endblock title %}</title>
+
+<head>
+  {% include 'head.html' %}
+</head>
+
+<body>
+  {% include 'header.html' %}
+  <!--content block-->
+  {% block content %} {% endblock content %}
+  <!--gallerysection-->
+  {% block gallery %}{% endblock gallery %}
+  <!--footer-->
+  {% include 'footer.html' %}
+  <!--scripts-->
+  {% include 'scripts.html' %}
+</body>
+
+</html>
